@@ -6,5 +6,3 @@ terraform apply
 
 ```
 
-# NOTES:
-- Prod environment is work in progress, see example code
