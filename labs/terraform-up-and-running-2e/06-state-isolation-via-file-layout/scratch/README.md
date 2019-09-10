@@ -1,6 +1,9 @@
 # Steps
 ```shell script
-source .secrets/aws-access.sh
+source .secrets/secrets.sh
+
+cd stage/data-stores/mysql
+terraform init
 
 ```
 
