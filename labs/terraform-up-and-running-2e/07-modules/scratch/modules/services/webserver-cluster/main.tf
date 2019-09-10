@@ -141,15 +141,6 @@ data "terraform_remote_state" "db" {
   }
 }
 
-data "aws_vpc" "default" {
-  # Search filters come here
-  default = true
-}
-
-data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
-}
-
 locals {
   http_port    = 80
   any_port     = 0
@@ -158,16 +149,12 @@ locals {
   all_ips      = ["0.0.0.0/0"]
 }
 
-terraform {
-  backend "s3" {
-    # Replace this with your bucket name!
-    bucket         = "terraform-up-and-running-state-nserfontein"
-    key            = "stage/services/webserver-cluster/terraform.tfstate"
-    region         = "us-east-2"
+data "aws_vpc" "default" {
+  # Search filters come here
+  default = true
+}
 
-    # Replace this with your DynamoDB table name!
-    dynamodb_table = "terraform-up-and-running-locks"
-    encrypt        = true
-  }
+data "aws_subnet_ids" "default" {
+  vpc_id = data.aws_vpc.default.id
 }
 
