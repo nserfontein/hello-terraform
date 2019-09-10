@@ -6,7 +6,9 @@ terraform graph # http://dreampuf.github.io/GraphvizOnline
 terraform apply
 
 terraform output
-terraform output public_ip
+terraform output alb_dns_name
 
-curl $(terraform output public_ip):8080
+curl $(terraform output alb_dns_name)
+
+terraform destroy
 ```
