@@ -1,8 +1,12 @@
+terraform {
+  required_version = ">= 0.12, < 0.13"
+}
+
 resource "aws_launch_configuration" "example" {
   image_id        = "ami-0c55b159cbfafe1f0"
   instance_type   = var.instance_type
   security_groups = [aws_security_group.instance.id]
-  user_data = data.template_file.user_data.rendered
+  user_data       = data.template_file.user_data.rendered
 
   # Required when using a launch configuration with an auto scaling group.
   # https://www.terraform.io/docs/providers/aws/r/launch_configuration.html
@@ -24,8 +28,8 @@ data "template_file" "user_data" {
 resource "aws_autoscaling_group" "example" {
   launch_configuration = aws_launch_configuration.example.name
   vpc_zone_identifier  = data.aws_subnet_ids.default.ids
-  target_group_arns = [aws_lb_target_group.asg.arn]
-  health_check_type = "ELB"
+  target_group_arns    = [aws_lb_target_group.asg.arn]
+  health_check_type    = "ELB"
 
   min_size = var.min_size
   max_size = var.max_size
@@ -60,7 +64,9 @@ resource "aws_lb" "example" {
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.example.arn
+
   port              = local.http_port
+
   protocol          = "HTTP"
 
   # By default, return a simple 404 page
@@ -150,7 +156,6 @@ locals {
 }
 
 data "aws_vpc" "default" {
-  # Search filters come here
   default = true
 }
 

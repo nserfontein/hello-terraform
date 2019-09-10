@@ -1,3 +1,8 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# REQUIRED PARAMETERS
+# You must provide a value for each of these parameters.
+# ---------------------------------------------------------------------------------------------------------------------
+
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
   type        = string
@@ -28,10 +33,14 @@ variable "max_size" {
   type        = number
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These parameters have reasonable defaults.
+# ---------------------------------------------------------------------------------------------------------------------
+
 variable "server_port" {
   description = "The port the server will use for HTTP requests"
-  type = number
-  default = 8080
+  type        = number
+  default     = 8080
 }
-
 
