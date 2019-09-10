@@ -19,12 +19,12 @@ curl $(terraform output alb_dns_name)
 
 # Cleanup
 ```shell script
-cd global/s3
+cd stage/services/webserver-cluster
 terraform destroy
 
 cd stage/data-stores/mysql
 terraform destroy
 
-cd stage/services/webserver-cluster
+cd global/s3
 terraform destroy
 ```
